@@ -1,0 +1,45 @@
+# 模块 B HTTP 验收记录 2026-11-27 00:44:05
+## 1. 启用状态下读者树（安全通报分支）
+{
+  "id": 3,
+  "parentId": 0,
+  "name": "安全通报",
+  "sortOrder": 30,
+  "enabled": true,
+  "children": [
+    {
+      "id": 105,
+      "parentId": 3,
+      "name": "化学类通报",
+      "sortOrder": 10,
+      "enabled": true,
+      "children": []
+    },
+    {
+      "id": 106,
+      "parentId": 3,
+      "name": "机电类通报",
+      "sortOrder": 20,
+      "enabled": true,
+      "children": []
+    }
+  ]
+}
+## 2. 停用 106 机电类通报（身份模块未落地，用 SQL 模拟后台操作）
+读者树中安全通报的子分类：化学类通报
+## 3. 匿名带 includeDisabled=true 应返回 401
+HTTP 401 
+{
+  "code": "UNAUTHENTICATED",
+  "message": "\u8BF7\u5148\u767B\u5F55",
+  "data": null
+}
+## 4. 管理端写接口在无会话时返回 401
+HTTP 401 
+{
+  "code": "UNAUTHENTICATED",
+  "message": "\u8BF7\u5148\u767B\u5F55",
+  "data": null
+}
+## 5. 恢复启用后读者树恢复
+读者树中安全通报的子分类：化学类通报,机电类通报
